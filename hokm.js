@@ -18,9 +18,8 @@ const NON_TRUMP_SUITS = ["a", "b", "c"];
 
 
 
-
 function getSuit(card) {
-  return card.split("")[0];
+  return card[0];
 }
 
 function getNumber(card) {
@@ -162,7 +161,7 @@ function getLowestCard(cardList) {
 }
 
 function getTrashCard(hand) {
-  // If we have any trupm, try to run out of a suit if possible
+  // If we have any trump, try to run out of a suit if possible
   if (hand.find(x => getSuit(x) == TRUMP_SUIT) != -1){
     for (const suit of NON_TRUMP_SUITS){
       const onSuit = hand.filter(x => getSuit(x) == suit);
@@ -172,7 +171,7 @@ function getTrashCard(hand) {
     }
   }
 
-  // Otherwise trash the lowest non-Trump
+  // Otherwise trash the lowest non-trump
   const nonTrump = hand.filter(x => getSuit(x) != TRUMP_SUIT);
   if (nonTrump.length > 0) {
     return getLowestCard(hand.filter(x => getSuit(x) != TRUMP_SUIT));
